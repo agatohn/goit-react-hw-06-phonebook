@@ -15,10 +15,10 @@ const contacts = createReducer([], {
     return [...contacts];
   },
 
-  [actions.getContacts]: () => {
-    const contacts = JSON.parse(localStorage.getItem("contacts"));
-    return [...contacts];
-  },
+  // [actions.getContacts]: () => {
+  //   const contacts = JSON.parse(localStorage.getItem("contacts"));
+  //   return [...contacts];
+  // },
 });
 const filter = createReducer("", {
   [actions.changeFilter]: (_, { payload }) => payload,
