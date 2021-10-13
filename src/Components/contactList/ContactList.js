@@ -3,10 +3,14 @@ import React from "react";
 import styles from "./ContactList.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
+import {
+  getContacts,
+  getFilter,
+} from "../../Redux/phonebook/phoneboock-selectors";
 
 export default function ContactList() {
-  const contacts = useSelector((state) => state.phonebook.contacts);
-  const filter = useSelector((state) => state.phonebook.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
   const filteredContacts = contacts.filter(({ name }) =>

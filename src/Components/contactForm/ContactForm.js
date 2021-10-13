@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
+import { getContacts } from "../../Redux/phonebook/phoneboock-selectors";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const contacts = useSelector((state) => state.phonebook.contacts);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleContactData = (e) => {

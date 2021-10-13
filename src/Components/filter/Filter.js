@@ -3,9 +3,10 @@ import React from "react";
 import styles from "./Filter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
+import { getFilter } from "../../Redux/phonebook/phoneboock-selectors";
 
 export default function Filter() {
-  const inputValue = useSelector((state) => state.phonebook.filter);
+  const inputValue = useSelector(getFilter);
   const dispatch = useDispatch();
   return (
     <>
