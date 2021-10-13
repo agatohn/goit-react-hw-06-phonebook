@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import styles from "./ContactForm.module.css";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
 
-function ContactForm({ contacts, handleAdd }) {
+export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const contacts = useSelector((state) => state.phonebook.contacts);
+  const dispatch = useDispatch();
 
   const handleContactData = (e) => {
     const { name, value } = e.target;
@@ -34,7 +36,8 @@ function ContactForm({ contacts, handleAdd }) {
       ? alert(
           `Friend ${newContact.name} or number ${newContact.number} is alredy exist`
         )
-      : handleAdd(newContact);
+      : dispatch(phonebookActions.addContact(newContact));
+    // handleAdd(newContact);
   };
 
   const handleSubmit = (e) => {
@@ -81,15 +84,15 @@ function ContactForm({ contacts, handleAdd }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  contacts: state.phonebook.contacts,
-});
+// const mapStateToProps = (state) => ({
+//   contacts: state.phonebook.contacts,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  handleAdd: (contact) => dispatch(phonebookActions.addContact(contact)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   handleAdd: (contact) => dispatch(phonebookActions.addContact(contact)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 // ContactForm.propTypes = {
 //   checkExist: PropTypes.func.isRequired,

@@ -1,10 +1,12 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import styles from "./Filter.module.css";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
 
-const Filter = ({ inputValue, handleFilter }) => {
+export default function Filter() {
+  const inputValue = useSelector((state) => state.phonebook.filter);
+  const dispatch = useDispatch();
   return (
     <>
       <label className={styles.filterLabel}>
@@ -13,22 +15,24 @@ const Filter = ({ inputValue, handleFilter }) => {
           className={styles.filterInput}
           type="text"
           value={inputValue}
-          onChange={handleFilter}
+          onChange={(e) =>
+            dispatch(phonebookActions.changeFilter(e.target.value))
+          }
         />
       </label>
     </>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  inputValue: state.phonebook.filter,
-});
+// const mapStateToProps = (state) => ({
+//   inputValue: state.phonebook.filter,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  handleFilter: (e) => dispatch(phonebookActions.changeFilter(e.target.value)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   handleFilter: (e) => dispatch(phonebookActions.changeFilter(e.target.value)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 // Filter.propTypes = {
 //   inputValue: PropTypes.string.isRequired,

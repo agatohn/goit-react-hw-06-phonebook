@@ -1,10 +1,14 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import styles from "./ContactList.module.css";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import phonebookActions from "../../Redux/phonebook/phonebook-actions";
 
-const ContactList = ({ contacts, handleDelete, filter }) => {
+export default function ContactList() {
+  const contacts = useSelector((state) => state.phonebook.contacts);
+  const filter = useSelector((state) => state.phonebook.filter);
+  const dispatch = useDispatch();
+
   const filteredContacts = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -20,7 +24,7 @@ const ContactList = ({ contacts, handleDelete, filter }) => {
           <button
             className={styles.contactsBtn}
             type="button"
-            onClick={() => handleDelete(id)}
+            onClick={() => dispatch(phonebookActions.deleteContact(id))}
           >
             Delete
           </button>
@@ -28,18 +32,18 @@ const ContactList = ({ contacts, handleDelete, filter }) => {
       ))}
     </ul>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  contacts: state.phonebook.contacts,
-  filter: state.phonebook.filter,
-});
+// const mapStateToProps = (state) => ({
+//   contacts: state.phonebook.contacts,
+//   filter: state.phonebook.filter,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  handleDelete: (id) => dispatch(phonebookActions.deleteContact(id)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   handleDelete: (id) => dispatch(phonebookActions.deleteContact(id)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+// export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 
 // ContactList.propTypes = {
 //   contacts: PropTypes.array.isRequired,

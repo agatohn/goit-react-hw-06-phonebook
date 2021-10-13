@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import ContactForm from "./contactForm/ContactForm";
 import Filter from "./filter/Filter";
 import ContactList from "./contactList/ContactList";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import phonebookActions from "../Redux/phonebook/phonebook-actions";
 
-function App({ getContacts }) {
+export default function App() {
+  const dispatch = useDispatch();
   useEffect(() => {
-    getContacts();
-  }, [getContacts]);
+    dispatch(phonebookActions.getContacts());
+  }, [dispatch]);
 
   return (
     <div>
@@ -22,8 +23,8 @@ function App({ getContacts }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getContacts: () => dispatch(phonebookActions.getContacts()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getContacts: () => dispatch(phonebookActions.getContacts()),
+// });
 
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
