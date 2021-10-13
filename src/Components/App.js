@@ -3,12 +3,12 @@ import ContactForm from "./contactForm/ContactForm";
 import Filter from "./filter/Filter";
 import ContactList from "./contactList/ContactList";
 import { connect } from "react-redux";
-// import { v4 as uuidv4 } from "uuid";
+import phonebookActions from "../Redux/phonebook/phonebook-actions";
 
-function App({ contacts }) {
+function App({ getContacts }) {
   useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify([...contacts]));
-  }, [contacts]);
+    getContacts();
+  }, [getContacts]);
 
   return (
     <div>
@@ -21,9 +21,9 @@ function App({ contacts }) {
     </div>
   );
 }
-const mapStateToProps = (state) => ({
-  contacts: state.phonebook.contacts,
-  filter: state.phonebook.filter,
+
+const mapDispatchToProps = (dispatch) => ({
+  getContacts: () => dispatch(phonebookActions.getContacts()),
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
