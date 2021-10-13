@@ -1,11 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import styles from "./ContactList.module.css";
+import { connect } from "react-redux";
+import phonebookActions from "../../Redux/phonebook/phonebook-actions";
 
-const ContactList = ({ contacts, handleDelete }) => {
+const ContactList = ({ contacts, handleDelete, filter }) => {
+  const filteredContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <ul className={styles.contactList}>
-      {contacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <li key={id} className={styles.contactListItem}>
           <p className={styles.contactsName}>
             {name}: {number}
@@ -24,9 +30,18 @@ const ContactList = ({ contacts, handleDelete }) => {
   );
 };
 
-ContactList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-};
+const mapStateToProps = (state) => ({
+  contacts: state.phonebook.contacts,
+  filter: state.phonebook.filter,
+});
 
-export default ContactList;
+const mapDispatchToProps = (dispatch) => ({
+  handleDelete: (id) => dispatch(phonebookActions.deleteContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+
+// ContactList.propTypes = {
+//   contacts: PropTypes.array.isRequired,
+//   handleDelete: PropTypes.func.isRequired,
+// };
