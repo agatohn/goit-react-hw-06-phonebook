@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContactForm from "./contactForm/ContactForm";
 import Filter from "./filter/Filter";
 import ContactList from "./contactList/ContactList";
-import { useDispatch } from "react-redux";
-import phonebookActions from "../Redux/phonebook/phonebook-actions";
+// import { useDispatch } from "react-redux";
+// import phonebookActions from "../Redux/phonebook/phonebook-actions";
 
 export default function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(phonebookActions.getContacts());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(phonebookActions.getContacts());
+  // }, [dispatch]);
 
   return (
     <div>

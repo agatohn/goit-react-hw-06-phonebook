@@ -6,12 +6,12 @@ import actions from "./phonebook-actions";
 const contacts = createReducer([], {
   [actions.addContact]: (state, { payload }) => {
     const contacts = [...state, payload];
-    localStorage.setItem("contacts", JSON.stringify(contacts));
+    // localStorage.setItem("contacts", JSON.stringify(contacts));
     return contacts;
   },
   [actions.deleteContact]: (state, { payload }) => {
     const contacts = state.filter(({ id }) => id !== payload);
-    localStorage.setItem("contacts", JSON.stringify([...contacts]));
+    // localStorage.setItem("contacts", JSON.stringify([...contacts]));
     return [...contacts];
   },
 
