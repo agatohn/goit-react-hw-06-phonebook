@@ -29,6 +29,7 @@ const middleware = [
 const phonebookPersistConfig = {
   key: "phonebook",
   storage,
+  blacklist: ["filter"],
 };
 
 export const store = configureStore({
